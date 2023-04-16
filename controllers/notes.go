@@ -2,23 +2,44 @@ package controllers
 
 import (
 	"net/http"
+	"smartnotes/models"
+	"smartnotes/repository"
+	"smartnotes/utils"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-type Note struct {
-	ID    int
-	Title string
-	Text  string
+func GetNotes(c *gin.Context) {
+	var allNotes []models.Note
+
+	var db *gorm.DB = repository.GetDB()
+
+	db.Find(&allNotes)
+
+	c.JSON(http.StatusOK, allNotes)
 }
 
-var notes = []Note{{
-	ID:    1,
-	Title: "First Note",
-	Text:  "Welcome to smartnotes",
-}}
+func AddNote(c *gin.Context) {
+	var newNote models.Note
+	var db = repository.GetDB()
 
-func GetNotes(c *gin.Context) {
+	err := c.BindJSON(&newNote)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ErrorResponse{Message: "Invalid request body"})
+		return
+	}
 
-	c.IndentedJSON(http.StatusOK, notes)
+	if newNote.Title == "" || newNote.Text == "" {
+		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ErrorResponse{Message: "Title and Text are required"})
+		return
+	}
+
+	result := db.Create(&newNote) // pass pointer of data to Create
+
+	if result.Error != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, utils.ErrorResponse{Message: "Not able to create note"})
+		return
+	}
+	c.JSON(http.StatusCreated, newNote)
 }
