@@ -11,3 +11,7 @@ type Note struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
+
+type MultiID struct {
+	IDs []int `json:"ids"`
+}
