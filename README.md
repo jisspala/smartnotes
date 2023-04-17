@@ -30,7 +30,7 @@ You can access the Swagger GUI to try out the API by visiting `http://localhost:
 
 ## Technical overview
 
-We are using **Go** with **Gin** to create APIs. T. To generate API docs and test APIs by manual we are using **Swagger**. For data-base operation and **Auto-migrations**, we are using **gorm**
+We are using **Go** with **Gin** to create APIs. To generate API docs and test APIs by manual we are using **Swagger**. For data-base operation and **Auto-migrations**, we are using **gorm**
 
 ## How to Test in local
 
