@@ -14,7 +14,7 @@ var db *gorm.DB
 // initializes a connection to a PostgreSQL and do auto migrates a Note model.
 func InitDb() {
 	var err error
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Africa/Lagos", "localhost", "user", "admin", "notepad", "54322")
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Africa/Lagos", "db", "user", "admin", "notepad", "5432")
 
 	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	db.AutoMigrate(&models.Note{})
