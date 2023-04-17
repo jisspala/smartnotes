@@ -11,7 +11,15 @@ type Note struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
+type SingleNote struct {
+	Title string `json:"title"`
+	Text  string `json:"text"`
+}
 
 type MultiID struct {
 	IDs []int `json:"ids"`
+}
+
+type Success struct {
+	success bool
 }

@@ -4,6 +4,8 @@ import (
 	"smartnotes/controllers"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func SetupRouter() *gin.Engine {
@@ -15,5 +17,6 @@ func SetupRouter() *gin.Engine {
 	v1.DELETE("/note/:id", controllers.DeleteNote)
 	v1.DELETE("/note/", controllers.MultiNoteDelete)
 	v1.PUT("/note/:id", controllers.UpdateNote)
+	v1.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return router
 }
