@@ -1,5 +1,7 @@
 ## SmartNotes
 
+![smartNote](https://raw.githubusercontent.com/jisspala/smartnotes/dev/docs/doc.png)
+
 This is a simple notepad application that provides a REST API to create, list, edit, and delete notes. The notes are stored in a PostgreSQL database.
 
 ## Requirements
