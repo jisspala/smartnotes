@@ -16,6 +16,23 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/v1/health": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "get health",
+                "operationId": "get-health",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Health"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/note": {
             "post": {
                 "produces": [
@@ -148,6 +165,14 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "models.Health": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
         "models.MultiID": {
             "type": "object",
             "properties": {

@@ -23,3 +23,6 @@ type MultiID struct {
 type Success struct {
 	success bool
 }
+type Health struct {
+	Status string `json:"status"`
+}

@@ -12,6 +12,15 @@ import (
 	"gorm.io/gorm"
 )
 
+// @Summary get health
+// @ID get-health
+// @Produce json
+// @Success 200 {object} models.Health
+// @Router /v1/health [get]
+func GetHealth(c *gin.Context) {
+	c.JSON(http.StatusOK, models.Health{Status: "OK"})
+}
+
 // @Summary get all items in the notes list
 // @ID get-all-notes
 // @Produce json

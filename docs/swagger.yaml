@@ -1,5 +1,10 @@
 basePath: /
 definitions:
+  models.Health:
+    properties:
+      status:
+        type: string
+    type: object
   models.MultiID:
     properties:
       ids:
@@ -36,6 +41,17 @@ info:
   title: SmartNotes API
   version: "1.0"
 paths:
+  /v1/health:
+    get:
+      operationId: get-health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Health'
+      summary: get health
   /v1/note:
     delete:
       operationId: delete-notes-by-ids
