@@ -44,5 +44,6 @@ We are using **Go** with **Gin** to create APIs. To generate API docs and test A
     os.Setenv("POSTGRES_DB", "notepad") **
 
 3.  Auto-migration will be take care by **gorm**
-4.  Run the application with `go run .`
-5.  You can access the Swagger GUI to try out the API by visiting `http://localhost:8001/v1/docs/index.html#/`.
+4.  Create swagger doc based on comments `swag init `
+5.  Run the application with `go run .`
+6.  You can access the Swagger GUI to try out the API by visiting `http://localhost:8001/v1/docs/index.html#/`.
