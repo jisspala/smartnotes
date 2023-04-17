@@ -10,9 +10,14 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=notepad
-      - POSTGRES_HOST=db
   app:
     build: .
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=notepad
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     ports:
       - "8001:8001"
     restart: on-failure
