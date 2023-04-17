@@ -1,0 +1,140 @@
+basePath: /
+definitions:
+  models.Health:
+    properties:
+      status:
+        type: string
+    type: object
+  models.MultiID:
+    properties:
+      ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  models.Note:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      text:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  models.SingleNote:
+    properties:
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  models.Success:
+    type: object
+host: localhost:8001
+info:
+  contact: {}
+  description: This is a Simple SmartNotes API server.
+  title: SmartNotes API
+  version: "1.0"
+paths:
+  /v1/health:
+    get:
+      operationId: get-health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Health'
+      summary: get health
+  /v1/note:
+    delete:
+      operationId: delete-notes-by-ids
+      parameters:
+      - description: models.MultiID[] data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.MultiID'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Success'
+      summary: delete notes by IDs
+    post:
+      operationId: create-note
+      parameters:
+      - description: models.SingleNote data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.SingleNote'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SingleNote'
+      summary: add a new note to the models.Note list
+  /v1/note/{id}:
+    delete:
+      operationId: delete-note-by-id
+      parameters:
+      - description: note ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Success'
+      summary: delete a note item by ID
+    put:
+      operationId: update-note-by-id
+      parameters:
+      - description: note ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: models.SingleNote data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.SingleNote'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Success'
+      summary: update a note by ID
+  /v1/notes:
+    get:
+      operationId: get-all-notes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Note'
+      summary: get all items in the notes list
+swagger: "2.0"

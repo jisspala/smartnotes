@@ -1,0 +1,215 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a Simple SmartNotes API server.",
+        "title": "SmartNotes API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8001",
+    "basePath": "/",
+    "paths": {
+        "/v1/health": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "get health",
+                "operationId": "get-health",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Health"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/note": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "add a new note to the models.Note list",
+                "operationId": "create-note",
+                "parameters": [
+                    {
+                        "description": "models.SingleNote data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SingleNote"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SingleNote"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "delete notes by IDs",
+                "operationId": "delete-notes-by-ids",
+                "parameters": [
+                    {
+                        "description": "models.MultiID[] data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.MultiID"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Success"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/note/{id}": {
+            "put": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "update a note by ID",
+                "operationId": "update-note-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "note ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "models.SingleNote data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SingleNote"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Success"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "delete a note item by ID",
+                "operationId": "delete-note-by-id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "note ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Success"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/notes": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "get all items in the notes list",
+                "operationId": "get-all-notes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Note"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Health": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.MultiID": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "models.Note": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.SingleNote": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Success": {
+            "type": "object"
+        }
+    }
+}
